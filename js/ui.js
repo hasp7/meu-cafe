@@ -166,8 +166,9 @@
       ctx.save(); ctx.translate(W / 2, 318); ctx.scale(2.7, 2.7);
       MC.drawHero(ctx, 0, 0, g.t, { charge: (Math.sin(g.t * 1.2) + 1) / 2 * 0.6 });
       ctx.restore();
-      const items = ['espresso', 'americano', 'chocolate', 'beer', 'francesinha'];
-      items.forEach((k, i) => MC.drawItem(ctx, k, 48 + i * 66, 196 + Math.sin(g.t * 2 + i) * 4, g.t + i, 0.85));
+      // bons à esquerda, maus à direita, com o centro livre para a onda de energia
+      const items = [['espresso', 40, 205], ['americano', 74, 262], ['chocolate', 40, 319], ['beer', 320, 205], ['mug', 286, 262], ['francesinha', 320, 319]];
+      items.forEach(([k, x, y], i) => MC.drawItem(ctx, k, x, y + Math.sin(g.t * 2 + i) * 4, g.t + i, 0.85));
       button(ctx, BTN.play, 'Jogar', '#f08a24', 26);
       button(ctx, BTN.mute, MC.audio.muted ? 'Som: desligado' : 'Som: ligado', '#1f4fa0', 15);
       T(ctx, `Recorde: ${g.best}`, W / 2, 578, 13, '#ffffff', { lw: 3 });

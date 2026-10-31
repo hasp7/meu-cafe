@@ -141,11 +141,29 @@
       ctx.fillStyle = c.beardColor;
       ctx.beginPath(); ctx.arc(0, -26, 9.5, 0.15 * Math.PI, 0.85 * Math.PI); ctx.quadraticCurveTo(0, -18, 8.4, -21.6); ctx.fill();
     }
-    MC.d.eyes(ctx, 0, -26, 0.85, 0);
+    const sun = c.glasses === 'sun';
+    if (!sun) MC.d.eyes(ctx, 0, -26, 0.85, 0);
     ctx.strokeStyle = INK; ctx.lineWidth = 1.3;
-    ctx.beginPath(); ctx.moveTo(-6, -30); ctx.lineTo(-1.5, -29); ctx.moveTo(6, -30); ctx.lineTo(1.5, -29); ctx.stroke();
+    const by = sun ? -1.2 : 0;
+    ctx.beginPath(); ctx.moveTo(-6, -30 + by); ctx.lineTo(-1.5, -29 + by); ctx.moveTo(6, -30 + by); ctx.lineTo(1.5, -29 + by); ctx.stroke();
     ctx.beginPath(); ctx.arc(0, -22.5, 2.6, 0.15 * Math.PI, 0.85 * Math.PI); ctx.stroke();
-    if (c.glasses) {
+    if (sun) {
+      // óculos de sol: hastes, lentes escuras com reflexo e ponte
+      ctx.strokeStyle = INK; ctx.lineWidth = 1.2;
+      ctx.beginPath(); ctx.moveTo(-7.6, -27.6); ctx.lineTo(-9.4, -27); ctx.moveTo(7.6, -27.6); ctx.lineTo(9.4, -27); ctx.stroke();
+      for (const s of [-1, 1]) {
+        ctx.beginPath();
+        ctx.moveTo(s * 0.9, -28.6); ctx.lineTo(s * 7.9, -28.6); ctx.lineTo(s * 7.3, -25.2);
+        ctx.quadraticCurveTo(s * 6.6, -22.8, s * 4.2, -22.9); ctx.quadraticCurveTo(s * 1.3, -23.1, s * 0.9, -25.6);
+        ctx.closePath();
+        ctx.fillStyle = c.glassesColor; ctx.fill();
+        ctx.lineWidth = 1; ctx.strokeStyle = INK; ctx.stroke();
+        ctx.strokeStyle = 'rgba(255,255,255,0.75)'; ctx.lineWidth = 0.9;
+        ctx.beginPath(); ctx.moveTo(s * 2.6, -27.4); ctx.lineTo(s * 4.4, -27.4); ctx.moveTo(s * 2.2, -26.2); ctx.lineTo(s * 3, -26.2); ctx.stroke();
+      }
+      ctx.strokeStyle = INK; ctx.lineWidth = 1.4;
+      ctx.beginPath(); ctx.moveTo(-1, -27.8); ctx.quadraticCurveTo(0, -28.6, 1, -27.8); ctx.stroke();
+    } else if (c.glasses) {
       ctx.strokeStyle = c.glassesColor; ctx.lineWidth = 1.2;
       for (const ex of [-2.9, 2.9]) { ctx.beginPath(); ctx.arc(ex, -26, 3, 0, Math.PI * 2); ctx.stroke(); }
       ctx.beginPath(); ctx.moveTo(-0.2, -26); ctx.lineTo(0.2, -26); ctx.stroke();

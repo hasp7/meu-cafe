@@ -10,8 +10,8 @@ window.MC.CHARACTER = {
   hairStyle: 'spiky',      // 'spiky' | 'short' | 'bald'
   beard: false,
   beardColor: '#2b2b33',
-  glasses: false,
-  glassesColor: '#1d2340',
+  glasses: 'sun',          // 'sun' (óculos de sol) | 'clear' (graduados) | false
+  glassesColor: '#1a1f36', // lentes dos óculos de sol / aros dos graduados
 
   // Fato de artes marciais
   gi: '#f08a24',           // cor principal
